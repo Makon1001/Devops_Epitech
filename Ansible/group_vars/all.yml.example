@@ -1,0 +1,10 @@
+---
+
+front_server: 
+back_server: 
+gitlab_server: 
+database_server: 
+
+user_ansible: 
+groupe_ansible: 
+become_ansible: 
