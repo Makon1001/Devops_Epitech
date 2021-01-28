@@ -1,0 +1,11 @@
+[front_server]
+front_server ansible_host={{front_server}} ansible_user={{user_ansible}} ansible_become_password={{become_ansible}}
+
+[back_server]
+back_server ansible_host={{back_server}} ansible_user={{user_ansible}} ansible_become_password={{become_ansible}}
+
+[gitlab_server]
+gitlab_server ansible_host={{gitlab_server}} ansible_user={{user_ansible}} ansible_become_password={{become_ansible}}
+
+[database_server]
+database_server ansible_host={{database_server}} ansible_user={{user_ansible}} ansible_become_password={{become_ansible}}

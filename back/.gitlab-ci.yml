@@ -1,0 +1,57 @@
+
+stages:
+  - build
+  - test
+  - deploy
+
+composer:
+  stage: build
+  script:
+    - composer install --prefer-dist --no-ansi --no-interaction --no-progress --no-scripts
+    - cp .env.example .env
+    - php artisan key:generate
+  artifacts:
+    paths:
+      - vendor/
+      - .env
+    expire_in: 1 days
+    when: always
+  cache:
+    paths:
+      - vendor/
+
+phpunit:
+  stage: test
+  dependencies:
+    - composer
+  script:
+    - echo "testing..."
+    - php -v
+
+deploy-app:
+  stage: deploy
+  dependencies:
+    - composer
+  script:
+    - echo "testing..."
+
+
+
+
+# phpunit:
+#   stage: testing
+#   dependencies:
+#     - composer
+#   script:
+#     - php -v
+#     - php artisan storage:link
+#     - sudo cp /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini /usr/local/etc/php/conf.d/docker-php-ext-xdebug.bak
+#     - echo "" | sudo tee /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+#     - ./vendor/phpunit/phpunit/phpunit --version
+#     - php -d short_open_tag=off ./vendor/phpunit/phpunit/phpunit -v --colors=never --stderr --exclude-group integration
+#     - sudo cp /usr/local/etc/php/conf.d/docker-php-ext-xdebug.bak /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+#   artifacts:
+#     paths:
+#       - ./storage/logs
+#     expire_in: 1 days
+#     when: on_failure

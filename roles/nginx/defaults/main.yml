@@ -1,0 +1,5 @@
+---
+http_conf: laravel-back
+http_port: "80"
+http_host: "{{ back_server }}"
+document_root: /var/www/html
